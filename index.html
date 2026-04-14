@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Arlend.Co — Mercado Créditos Hipotecarios</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+<style>
+/* ─── RESET ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+:root{
+  --black:#0d0d0d;
+  --white:#ffffff;
+  --off-white:#f0f2ee;   /* fondo secciones "for sale" y FAQ */
+  --sage:#aebdb5;        /* fondo sage exacto del Canva */
+  --gray:#5a5a5a;
+  --light-gray:#9a9a9a;
+  --border:#d8d8d4;
+  --gold:#c9a84c;
+  --rust:#b85c38;
+  --green:#1e6a5e;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+
+/* ─── NAV — minimal, transparente, top-left logo ─── */
+nav{
+  position:absolute;top:0;left:0;right:0;z-index:100;
+  padding:28px 48px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-size:.72rem;font-weight:400;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--white);text-decoration:none;
+}
+.nav-right{display:flex;gap:32px;align-items:center}
+.nav-right a{
+  font-size:.72rem;font-weight:300;letter-spacing:.08em;
+  color:rgba(255,255,255,.75);text-decoration:none;transition:color .2s;
+}
+.nav-right a:hover{color:var(--white)}
+@media(max-width:640px){.nav-right{display:none}nav{padding:22px 24px}}
+
+/* ════════════════════════════════════════
+   1. HERO — fullscreen photo, huge title bottom-left
+═══════════════════════════════════════════ */
+#hero{
+  position:relative;
+  width:100%;height:100vh;min-height:620px;
+  overflow:hidden;
+}
+.hero-photo{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1800&q=85') center/cover no-repeat;
+  filter:brightness(.52);
+}
+.hero-body{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:clamp(32px,6vw,80px);
+}
+.hero-h1{
+  font-size:clamp(3.5rem,9vw,8rem);
+  font-weight:300;line-height:.95;letter-spacing:-.03em;
+  color:var(--white);
+  max-width:820px;margin-bottom:48px;
+}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+.btn-outline{
+  font-size:.72rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.75);padding:13px 40px;
+  color:var(--white);text-decoration:none;transition:background .2s;
+}
+.btn-outline:hover{background:rgba(255,255,255,.1)}
+.btn-solid{
+  font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--white);padding:13px 40px;
+  color:var(--black);text-decoration:none;transition:opacity .2s;
+}
+.btn-solid:hover{opacity:.88}
+
+/* ════════════════════════════════════════
+   2. ABOUT — Canva: logo top-left, photo center, text right
+═══════════════════════════════════════════ */
+#about{
+  background:var(--white);
+  padding:72px clamp(32px,6vw,80px);
+}
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 380px 1fr;
+  gap:48px;
+  align-items:start;
+}
+.about-logo-big{
+  font-size:clamp(3rem,5.5vw,4.8rem);
+  font-weight:300;letter-spacing:-.03em;line-height:1;
+  color:var(--black);padding-top:4px;
+}
+.about-photo{
+  width:100%;aspect-ratio:3/4;
+  background:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80') center/cover no-repeat;
+}
+.about-text{
+  font-size:.95rem;font-weight:300;line-height:1.9;
+  color:var(--gray);
+  padding-top:42%;  /* aligns to mid photo as in Canva */
+}
+
+/* ════════════════════════════════════════
+   3. WHY US — title top-left, photo center, list right
+═══════════════════════════════════════════ */
+#why{
+  background:var(--white);
+  padding:72px clamp(32px,6vw,80px);
+  border-top:1px solid var(--border);
+}
+.why-grid{
+  display:grid;
+  grid-template-columns:1fr 380px 1fr;
+  gap:48px;
+  align-items:center;
+}
+.why-h{
+  font-size:clamp(2.4rem,4.5vw,4rem);
+  font-weight:300;letter-spacing:-.03em;line-height:1.05;
+  color:var(--black);
+}
+.why-photo{
+  width:100%;aspect-ratio:3/4;
+  background:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80') center/cover no-repeat;
+}
+.why-list{list-style:none;display:flex;flex-direction:column}
+.why-list li{
+  padding:18px 0;border-bottom:1px solid var(--border);
+  font-size:.88rem;font-weight:300;color:var(--gray);
+  display:flex;gap:16px;align-items:baseline;
+}
+.why-list li span.n{
+  font-size:.62rem;font-weight:400;letter-spacing:.1em;
+  color:var(--light-gray);flex-shrink:0;min-width:24px;
+}
+
+/* ════════════════════════════════════════
+   4. STATS — black band
+═══════════════════════════════════════════ */
+#stats{background:var(--black);padding:64px clamp(32px,6vw,80px)}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(255,255,255,.07);
+}
+.stat-cell{
+  background:var(--black);padding:40px 24px;
+  display:flex;flex-direction:column;gap:8px;
+}
+.stat-num{
+  font-size:clamp(2.4rem,4vw,3.8rem);font-weight:200;
+  color:var(--white);letter-spacing:-.04em;line-height:1;
+}
+.stat-unit{font-size:.55em;font-weight:300;color:var(--gold)}
+.stat-desc{font-size:.75rem;font-weight:300;color:rgba(255,255,255,.38);line-height:1.6}
+
+/* ════════════════════════════════════════
+   5. LÍNEAS DE CRÉDITO — off-white bg, 3-col cards
+═══════════════════════════════════════════ */
+#creditos{
+  background:var(--off-white);
+  padding:80px clamp(32px,6vw,80px);
+}
+.section-eyebrow{
+  font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--light-gray);margin-bottom:12px;
+}
+.section-h{
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:300;
+  letter-spacing:-.025em;line-height:1.1;
+  color:var(--black);margin-bottom:48px;
+}
+
+/* filters */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:44px}
+.fb{
+  font-size:.68rem;font-weight:400;letter-spacing:.08em;text-transform:uppercase;
+  padding:8px 20px;border:1px solid var(--border);
+  background:var(--white);color:var(--gray);cursor:pointer;transition:all .2s;
+}
+.fb:hover,.fb.active{background:var(--black);color:var(--white);border-color:var(--black)}
+
+/* bank card grid — exactly like Canva: 3 cols, logo image area top, text below */
+.banks-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+  /* no gap between cards, separated by slight spacing like Canva */
+  row-gap:48px;column-gap:28px;
+}
+.bcard{background:transparent;display:flex;flex-direction:column}
+.bcard-img{
+  width:100%;aspect-ratio:16/10;
+  border:1px solid var(--border);
+  background:var(--white);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+/* individual bank bg colors */
+.bg-nacion  {background:#fff}
+.bg-bancor  {background:#006b5e}
+.bg-hipo    {background:#fff}
+.bg-galicia {background:#fff}
+.bg-santander{background:#fff}
+.bg-macro   {background:#fff}
+.bg-bbva    {background:#004481}
+.bg-super   {background:#fff}
+.bg-icbc    {background:#fff}
+.bg-ciudad  {background:#003087}
+.bg-pata    {background:#004b8d}
+.bg-coop    {background:#c41230}
+.bg-comafi  {background:#f5f5f3}
+.bg-bru     {background:#1a1aff}
+.bg-sol     {background:#fff8e1}
+.bg-bapro   {background:#0066cc}
+
+.bcard-body{padding:18px 0 0}
+.bcard-cat{
+  font-size:.62rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--light-gray);margin-bottom:8px;
+}
+.bcard-name{
+  font-size:1.1rem;font-weight:600;line-height:1.25;
+  color:var(--black);margin-bottom:10px;
+}
+.bcard-specs{
+  font-size:.82rem;font-weight:300;color:var(--gray);
+  line-height:1.8;margin-bottom:10px;
+}
+.bcard-mono{
+  font-size:.78rem;font-weight:300;color:var(--black);
+}
+.bcard-mono::before{content:'# ';color:var(--light-gray)}
+.bcard-reqs{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:5px}
+.req-row{display:flex;align-items:flex-start;gap:8px;font-size:.74rem;font-weight:300;color:var(--gray);line-height:1.5}
+.req-dot{width:4px;height:4px;border-radius:50%;background:var(--light-gray);flex-shrink:0;margin-top:5px}
+.req-row strong{font-weight:500;color:var(--black)}
+
+/* ─── table ─── */
+.table-wrap{
+  overflow-x:auto;margin-top:56px;
+  border:1px solid var(--border);background:var(--white);
+}
+.table-wrap table{width:100%;border-collapse:collapse;font-size:.8rem;white-space:nowrap}
+.table-wrap thead{background:var(--black);color:var(--white)}
+.table-wrap thead th{padding:13px 18px;text-align:left;font-weight:400;letter-spacing:.06em;font-size:.68rem;text-transform:uppercase}
+.table-wrap tbody tr{border-bottom:1px solid var(--border)}
+.table-wrap tbody tr:last-child{border:none}
+.table-wrap tbody tr:hover{background:#f8f8f6}
+.table-wrap td{padding:11px 18px;vertical-align:middle;font-weight:300}
+.td-n{font-size:.65rem;color:var(--light-gray)}
+.td-b{font-weight:500}
+.td-rate{font-weight:600;font-size:.88rem}
+.t-best{color:var(--green)}.t-mid{color:var(--black)}.t-hi{color:var(--rust)}
+.t-yes{color:var(--green);font-weight:500}
+
+.disc{
+  border-left:3px solid var(--gold);padding:14px 18px;
+  font-size:.76rem;font-weight:300;color:var(--gray);margin-top:28px;
+  background:var(--white);
+}
+.disc strong{color:var(--black);font-weight:500}
+
+/* ════════════════════════════════════════
+   6. FAQ / PREGUNTAS FRECUENTES
+   Canva layout: title + photo LEFT, 2-col Q&A RIGHT
+   Second slide: 2-col Q&A left, photo right
+═══════════════════════════════════════════ */
+#faq{
+  background:var(--sage);
+  padding:80px clamp(32px,6vw,80px);
+}
+
+/* Slide A: title+photo LEFT · 2-col right */
+.faq-a{
+  display:grid;
+  grid-template-columns:340px 1fr;
+  gap:64px;
+  margin-bottom:72px;
+  align-items:start;
+}
+.faq-a-left{}
+.faq-a-left h2{
+  font-size:clamp(2.4rem,4.5vw,4rem);font-weight:300;
+  letter-spacing:-.03em;line-height:1.05;color:var(--black);
+  margin-bottom:36px;
+}
+.faq-a-photo{
+  width:100%;aspect-ratio:3/4;max-width:320px;
+  background:url('https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=700&q=80') center/cover no-repeat;
+}
+.faq-a-right{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:32px 56px;padding-top:8px;
+}
+
+/* Slide B: 2-col left · photo right */
+.faq-b{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:64px;
+  align-items:start;
+  border-top:1px solid rgba(0,0,0,.1);
+  padding-top:56px;
+}
+.faq-b-left{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:32px 56px;
+}
+.faq-b-photo{
+  width:100%;aspect-ratio:3/4;
+  background:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80') center/cover no-repeat;
+}
+
+.fq{font-size:.9rem;font-weight:600;margin-bottom:10px;line-height:1.4;color:var(--black)}
+.fa{font-size:.82rem;font-weight:300;line-height:1.8;color:#3a4840}
+.fa a{color:var(--black)}
+
+/* ════════════════════════════════════════
+   7. CONDICIONES — white, bento grid
+═══════════════════════════════════════════ */
+#condiciones{
+  background:var(--white);
+  padding:80px clamp(32px,6vw,80px);
+  border-top:1px solid var(--border);
+}
+.bento{
+  display:grid;grid-template-columns:repeat(12,1fr);
+  gap:1px;background:var(--border);border:1px solid var(--border);
+}
+.bn{background:var(--white);padding:32px 28px;display:flex;flex-direction:column;gap:10px}
+.bn-6{grid-column:span 6}.bn-4{grid-column:span 4}
+.bn-3{grid-column:span 3}.bn-8{grid-column:span 8}
+.bn-blk{background:var(--black)}.bn-sage{background:#3d5249}.bn-gld{background:var(--gold)}
+.bn-sup{font-size:clamp(2.8rem,4.5vw,4rem);font-weight:200;line-height:1;letter-spacing:-.04em}
+.bn-ttl{font-size:.92rem;font-weight:500;line-height:1.3}
+.bn-lbl{font-size:.58rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;opacity:.4}
+.bn-txt{font-size:.78rem;line-height:1.8;color:var(--gray)}
+.bn-blk .bn-ttl,.bn-blk .bn-sup,.bn-blk .bn-lbl{color:var(--white)}
+.bn-blk .bn-txt{color:rgba(255,255,255,.42)}
+.bn-blk .bn-lbl{opacity:.32}
+.bn-sage .bn-ttl,.bn-sage .bn-sup,.bn-sage .bn-lbl{color:#d8eada}
+.bn-sage .bn-txt{color:rgba(216,234,218,.52)}
+.bn-gld .bn-ttl,.bn-gld .bn-sup,.bn-gld .bn-lbl{color:var(--black)}
+.bn-gld .bn-txt{color:rgba(0,0,0,.52)}
+.bar{height:3px;background:rgba(0,0,0,.08);margin-top:4px}
+.bar-f{height:100%;background:var(--black)}
+.bn-blk .bar{background:rgba(255,255,255,.1)}.bn-blk .bar-f{background:var(--gold)}
+.bn-sage .bar-f{background:#8fcc7a}
+.brow{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--border)}
+.brow:last-child{border:none}
+.bn-blk .brow{border-color:rgba(255,255,255,.07)}
+.bn-sage .brow{border-color:rgba(255,255,255,.1)}
+.bk{font-size:.74rem;font-weight:300;color:var(--gray)}
+.bv{font-size:.84rem;font-weight:500}
+.bn-blk .bk{color:rgba(255,255,255,.38)}.bn-blk .bv{color:var(--white)}
+.bn-sage .bk{color:rgba(216,234,218,.45)}.bn-sage .bv{color:#d8eada}
+.dest-l{display:flex;flex-direction:column}
+.dest-i{display:flex;align-items:center;gap:12px;font-size:.78rem;font-weight:300;color:var(--gray);padding:9px 0;border-bottom:1px solid var(--border)}
+.dest-i:last-child{border:none}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--black);flex-shrink:0}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px}
+.chip{font-size:.63rem;font-weight:400;letter-spacing:.03em;padding:4px 10px;border:1px solid var(--border);color:var(--gray)}
+.bn-blk .chip{border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.48)}
+@media(max-width:900px){.bn-6,.bn-8{grid-column:span 12}.bn-4{grid-column:span 6}.bn-3{grid-column:span 6}}
+@media(max-width:560px){.bn-6,.bn-4,.bn-3,.bn-8{grid-column:span 12}}
+
+/* ════════════════════════════════════════
+   8. CONTACTO — light bg
+═══════════════════════════════════════════ */
+#contact{
+  background:var(--off-white);
+  padding:80px clamp(32px,6vw,80px);
+  border-top:1px solid var(--border);
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-h{
+  font-size:clamp(2rem,4vw,3.2rem);font-weight:300;
+  letter-spacing:-.025em;line-height:1.1;margin-bottom:24px;
+}
+.contact-sub{font-size:.88rem;font-weight:300;color:var(--gray);line-height:1.9;max-width:360px}
+.contact-rows{display:flex;flex-direction:column}
+.c-row{padding:20px 0;border-bottom:1px solid var(--border)}
+.c-row:first-child{border-top:1px solid var(--border)}
+.c-lbl{font-size:.6rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--light-gray);margin-bottom:5px}
+.c-val{font-size:.92rem;font-weight:300;color:var(--black)}
+.c-val a{color:var(--black);text-decoration:none}
+
+/* ════════════════════════════════════════
+   9. FOOTER — black, exact Canva layout
+   Logo BIG top-left
+   Links col-center, contact col-right
+═══════════════════════════════════════════ */
+footer{
+  background:var(--black);
+  padding:72px clamp(32px,6vw,80px) 48px;
+}
+.ft-top{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:48px;
+  margin-bottom:72px;
+}
+.ft-brand{
+  font-size:clamp(3rem,5vw,4.8rem);font-weight:300;
+  letter-spacing:-.03em;color:var(--white);line-height:1;
+}
+.ft-nav{display:flex;flex-direction:column;gap:20px;padding-top:8px}
+.ft-nav a{
+  font-size:.92rem;font-weight:300;
+  color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s;
+  letter-spacing:.01em;
+}
+.ft-nav a:hover{color:var(--white)}
+.ft-contact{display:flex;flex-direction:column;gap:6px;padding-top:8px}
+.ft-contact-block{margin-bottom:20px}
+.ft-contact p{font-size:.82rem;font-weight:300;color:rgba(255,255,255,.45);line-height:1.8}
+.ft-contact strong{color:rgba(255,255,255,.72);font-weight:400}
+.ft-socials{display:flex;gap:14px;margin-top:24px}
+.ft-soc{
+  width:40px;height:40px;border:1px solid rgba(255,255,255,.2);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  text-decoration:none;color:rgba(255,255,255,.55);
+  transition:all .2s;
+}
+.ft-soc:hover{border-color:var(--white);color:var(--white)}
+.ft-soc svg{width:16px;height:16px;fill:currentColor}
+.ft-bottom{
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:24px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.ft-bottom p{font-size:.68rem;font-weight:300;color:rgba(255,255,255,.22)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  .about-grid,.why-grid{grid-template-columns:1fr 320px 1fr}
+  .banks-grid{grid-template-columns:repeat(2,1fr)}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .ft-top{grid-template-columns:1fr 1fr}
+  .faq-a{grid-template-columns:280px 1fr}
+  .faq-b{grid-template-columns:1fr 280px}
+}
+@media(max-width:768px){
+  .about-grid,.why-grid{grid-template-columns:1fr}
+  .about-text{padding-top:0}
+  .about-photo,.why-photo{aspect-ratio:16/9}
+  .banks-grid{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .faq-a{grid-template-columns:1fr}
+  .faq-a-right{grid-template-columns:1fr}
+  .faq-b{grid-template-columns:1fr}
+  .faq-b-left{grid-template-columns:1fr}
+  .faq-b-photo{display:none}
+  .contact-grid{grid-template-columns:1fr}
+  .ft-top{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .stats-grid{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a class="nav-logo" href="#">Arlend Co.</a>
+  <div class="nav-right">
+    <a href="#creditos">Créditos</a>
+    <a href="#faq">FAQ</a>
+    <a href="#condiciones">Condiciones</a>
+    <a href="#contact">Contacto</a>
+  </div>
+</nav>
+
+<!-- ══ 1. HERO ══ -->
+<section id="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-body">
+    <h1 class="hero-h1">Mercado creditos<br>hipotecarios.</h1>
+    <div class="hero-btns">
+      <a class="btn-outline" href="#contact">Publicar</a>
+      <a class="btn-solid"   href="#creditos">Mas Info</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 2. ABOUT ══ -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-logo-big">Arlend.Co</div>
+    <div class="about-photo"></div>
+    <div class="about-text">
+      Alcanzar tu proximo hogar puede ser mas agil utilizando nuestra plataforma, donde junto a un equipo de expertos creamos un ecosistema de soluciones y asesoramiento.
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3. WHY US ══ -->
+<section id="why">
+  <div class="why-grid">
+    <div class="why-h">Te guiamos en la<br>decision correcta.</div>
+    <div class="why-photo"></div>
+    <ul class="why-list">
+      <li><span class="n">01</span>Score crediticio.</li>
+      <li><span class="n">02</span>La mejor opcion de credito segun tus ingresos.</li>
+      <li><span class="n">03</span>Guiamos en planificacion financiera.</li>
+      <li><span class="n">04</span>Propiedades aptas credito validadas.</li>
+      <li><span class="n">05</span>Gestion y seguimiento del proceso completo.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ 4. STATS ══ -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-cell">
+      <div class="stat-num">6<span class="stat-unit">%</span></div>
+      <div class="stat-desc">Tasa minima TNA del mercado · Banco Nacion</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">17<span class="stat-unit">+</span></div>
+      <div class="stat-desc">Bancos con lineas hipotecarias activas en 2026</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">30<span class="stat-unit">años</span></div>
+      <div class="stat-desc">Plazo maximo de financiacion disponible</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">80<span class="stat-unit">%</span></div>
+      <div class="stat-desc">Financiacion maxima sobre valor del inmueble</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. LÍNEAS DE CRÉDITO ══ -->
+<section id="creditos">
+  <p class="section-eyebrow">Actualizado · Marzo–Abril 2026</p>
+  <h2 class="section-h">Lineas de creditos</h2>
+
+  <div class="filters">
+    <button class="fb active" onclick="fc('todos',this)">Todos</button>
+    <button class="fb" onclick="fc('publico',this)">Bancos publicos</button>
+    <button class="fb" onclick="fc('privado',this)">Bancos privados</button>
+    <button class="fb" onclick="fc('especial',this)">Lineas especiales</button>
+    <button class="fb" onclick="fc('mono',this)">Aptos Monotributistas</button>
+  </div>
+
+  <div class="banks-grid" id="bg">
+
+    <!-- BANCO NACIÓN -->
+    <div class="bcard" data-tipo="publico" data-mono="true">
+      <div class="bcard-img bg-nacion">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- BNA Shield -->
+          <path d="M30 12 L50 12 L50 52 Q50 64 40 68 Q30 64 30 52 Z" fill="#007a9e" opacity=".15"/>
+          <path d="M30 12 L50 12 L50 52 Q50 64 40 68 Q30 64 30 52 Z" fill="none" stroke="#007a9e" stroke-width="2"/>
+          <text x="40" y="38" text-anchor="middle" font-size="10" fill="#007a9e" font-family="sans-serif" font-weight="700">BNA</text>
+          <!-- Text -->
+          <text x="158" y="30" text-anchor="middle" font-size="11" fill="#007a9e" font-family="sans-serif" font-weight="300" letter-spacing="1">BANCO DE LA</text>
+          <text x="158" y="50" text-anchor="middle" font-size="18" fill="#007a9e" font-family="sans-serif" font-weight="600">Nación Argentina</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Público Nacional</div>
+        <div class="bcard-name">Hipotecario Bco Nacion</div>
+        <div class="bcard-specs">Hasta 75% valor &nbsp;|&nbsp; <strong style="color:#1e6a5e">6% TNA</strong> &nbsp;|&nbsp; Plazo 30 años</div>
+        <div class="bcard-mono">Apto Monotributistas.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Ingreso mín.:</strong>&nbsp;$1.500.000–$2.000.000/mes</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Scoring:</strong>&nbsp;~900 pts (muy exigente)</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Antigüedad dep.:</strong>&nbsp;1 año (6 meses en empleo actual)</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Monotrib./autón.:</strong>&nbsp;2 años de actividad</div>
+          <div class="req-row"><span class="req-dot"></span><strong>2da vivienda:</strong>&nbsp;12% TNA · hasta 350.000 UVAs</div>
+          <div class="req-row"><span class="req-dot"></span>Proceso 100% digital · aprobación en 24 hs</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANCOR -->
+    <div class="bcard" data-tipo="publico" data-mono="true">
+      <div class="bcard-img bg-bancor">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <rect x="12" y="14" width="10" height="52" fill="#e8451e"/>
+          <text x="148" y="52" text-anchor="middle" font-size="34" font-weight="700" fill="white" font-family="sans-serif" letter-spacing="1">BANCOR</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Público Córdoba</div>
+        <div class="bcard-name">Hipotecario BANCOR</div>
+        <div class="bcard-specs">250.000 UVA / 75% &nbsp;|&nbsp; <strong style="color:#1e6a5e">8,9% TNA</strong> cta. sueldo &nbsp;|&nbsp; Plazo 20 años</div>
+        <div class="bcard-mono">Apto Monotributistas.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>TNA mercado gral.:</strong>&nbsp;9,9%</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Monto máx.:</strong>&nbsp;~250.000 UVAs (~$317M)</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Destinos:</strong>&nbsp;compra, construcción, terminación, ampliación</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Relación cuota/ing.:</strong>&nbsp;máx. 25%</div>
+          <div class="req-row"><span class="req-dot"></span>Vivienda única y de ocupación permanente</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANCO HIPOTECARIO -->
+    <div class="bcard" data-tipo="privado" data-mono="true">
+      <div class="bcard-img bg-hipo">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- diamond -->
+          <polygon points="36,14 58,40 36,66 14,40" fill="#e8451e"/>
+          <!-- inner arrow -->
+          <polygon points="36,24 50,40 36,52 26,40" fill="white" opacity=".9"/>
+          <!-- text -->
+          <text x="86" y="28" font-size="9" fill="#aaa" font-family="sans-serif" font-weight="400">BANCO</text>
+          <text x="86" y="52" font-size="22" fill="#2a2a2a" font-family="sans-serif" font-weight="400">Hipotecario</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Privado</div>
+        <div class="bcard-name">Banco Hipotecario</div>
+        <div class="bcard-specs">$250M / 80% valor &nbsp;|&nbsp; <strong style="color:#b85c38">12,5% TNA</strong> &nbsp;|&nbsp; Plazo 15 años</div>
+        <div class="bcard-mono">Apto Monotributistas.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Pack Sueldo:</strong>&nbsp;13,9% TNA</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Pack Emprendedor:</strong>&nbsp;13,9% TNA (monotrib.)</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Financiación:</strong>&nbsp;hasta 80% primera y segunda vivienda</div>
+          <div class="req-row"><span class="req-dot"></span>Tasa bajó de 13,9% en 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GALICIA -->
+    <div class="bcard" data-tipo="privado" data-mono="true">
+      <div class="bcard-img bg-galicia">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Red box with cross shield -->
+          <rect x="10" y="10" width="88" height="60" fill="#e8451e" rx="3"/>
+          <circle cx="30" cy="40" r="14" fill="none" stroke="white" stroke-width="2"/>
+          <path d="M22 40 L38 40 M30 32 L30 48" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="62" y="46" text-anchor="middle" font-size="16" font-weight="700" fill="white" font-family="sans-serif">Galicia</text>
+          <!-- right text -->
+          <text x="175" y="46" text-anchor="middle" font-size="24" font-weight="700" fill="#e8451e" font-family="sans-serif">Galicia</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Privado</div>
+        <div class="bcard-name">Hipotecario Bco Galicia</div>
+        <div class="bcard-specs">Sin límite &nbsp;|&nbsp; <strong style="color:#1e6a5e">7,5% TNA</strong> cta. sueldo &nbsp;|&nbsp; Plazo 20 años</div>
+        <div class="bcard-mono">Apto Monotributistas.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>TNA mercado gral.:</strong>&nbsp;9% (hasta 10%)</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Financiación:</strong>&nbsp;hasta 70% del valor del inmueble</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Destino:</strong>&nbsp;primera vivienda · uso permanente</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Relación cuota/ing.:</strong>&nbsp;máx. 25%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SANTANDER -->
+    <div class="bcard" data-tipo="privado" data-mono="true">
+      <div class="bcard-img bg-santander">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Santander flame -->
+          <path d="M28 50 Q36 20 44 50 Q52 20 60 50" stroke="#e8001c" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <text x="165" y="46" text-anchor="middle" font-size="24" fill="#e8001c" font-family="sans-serif" font-weight="300">Santander</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Privado</div>
+        <div class="bcard-name">Hipotecario Bco Santander</div>
+        <div class="bcard-specs">Sin límite / 80% &nbsp;|&nbsp; <strong style="color:#1e6a5e">9,5% TNA</strong> &nbsp;|&nbsp; Plazo 30 años</div>
+        <div class="bcard-mono">Apto Monotributistas.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Ingreso mín.:</strong>&nbsp;$2.240.000/mes (viv. permanente)</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Vivienda no permanente:</strong>&nbsp;50% financiación</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Condición:</strong>&nbsp;acreditar haberes en el banco</div>
+          <div class="req-row"><span class="req-dot"></span>Tasa bajó más de 5 puntos en feb. 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MACRO -->
+    <div class="bcard" data-tipo="privado" data-mono="true">
+      <div class="bcard-img bg-macro">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Macro rainbow arc -->
+          <path d="M14 56 Q14 20 44 20 Q74 20 74 56" stroke="#f57c00" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <circle cx="44" cy="56" r="6" fill="#f57c00"/>
+          <text x="168" y="48" text-anchor="middle" font-size="30" fill="#1a237e" font-family="sans-serif" font-weight="700">Macro</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Privado</div>
+        <div class="bcard-name">Hipotecario Bco Macro</div>
+        <div class="bcard-specs">Sin límite &nbsp;|&nbsp; <strong style="color:#1e6a5e">9,5% TNA</strong> + línea USD &nbsp;|&nbsp; Plazo 30 años</div>
+        <div class="bcard-mono">Apto Monotributistas.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Línea pesos UVA:</strong>&nbsp;9,5% TNA · sin límite de monto</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Línea dólares:</strong>&nbsp;11,5% anual · hasta USD 1M · 5 años</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Financiación USD:</strong>&nbsp;hasta 50% del valor</div>
+          <div class="req-row"><span class="req-dot"></span>Única línea hipotecaria en USD del mercado</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BBVA -->
+    <div class="bcard" data-tipo="privado" data-mono="true">
+      <div class="bcard-img bg-bbva">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <text x="130" y="54" text-anchor="middle" font-size="46" font-weight="700" fill="white" font-family="sans-serif" letter-spacing="-2">BBVA</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Privado Internacional</div>
+        <div class="bcard-name">Hipotecario BBVA</div>
+        <div class="bcard-specs">80% valor &nbsp;|&nbsp; <strong style="color:#1e6a5e">7,5% TNA</strong> monotrib. &nbsp;|&nbsp; Plazo 30 años</div>
+        <div class="bcard-mono">Apto Monotributistas · 7,5% TNA.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Cta. sueldo BBVA + seguros:</strong>&nbsp;7,5% TNA</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Monotrib./resp. inscr.:</strong>&nbsp;7,5% TNA</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Sin acreditación haberes:</strong>&nbsp;17% TNA</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Ingreso mín.:</strong>&nbsp;$1.409.600 (4 SMVM)</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Monto mín.:</strong>&nbsp;$20.000.000 · Sistema francés</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUPERVIELLE -->
+    <div class="bcard" data-tipo="privado" data-mono="true">
+      <div class="bcard-img bg-super" style="background:#f5f5f3">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- S mark -->
+          <path d="M22 30 Q22 18 34 18 Q46 18 46 28 Q46 38 22 42 Q22 52 22 52 Q22 64 34 64 Q46 64 46 54" stroke="#f5a623" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <text x="158" y="48" text-anchor="middle" font-size="20" fill="#2a2a2a" font-family="sans-serif" font-weight="500">Supervielle</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Privado</div>
+        <div class="bcard-name">Hipotecario Bco Supervielle</div>
+        <div class="bcard-specs">Sin límite / 65–70% &nbsp;|&nbsp; <strong style="color:#b85c38">15% TNA</strong> &nbsp;|&nbsp; Plazo 30 años</div>
+        <div class="bcard-mono">Apto Monotributistas.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Ingreso mín.:</strong>&nbsp;más de $5.000.000/mes</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Financiación:</strong>&nbsp;hasta 65% sin garante · 70% con</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Cuota ref.:</strong>&nbsp;~$1.440.000/mes ($100M · 20 años)</div>
+          <div class="req-row"><span class="req-dot"></span>Primera y segunda vivienda permanente</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ICBC -->
+    <div class="bcard" data-tipo="privado" data-mono="false">
+      <div class="bcard-img" style="background:#fafaf8;border:1px solid var(--border)">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- ICBC logo: red bar + text -->
+          <rect x="12" y="20" width="8" height="40" fill="#c8000a"/>
+          <text x="148" y="52" text-anchor="middle" font-size="36" font-weight="700" fill="#c8000a" font-family="sans-serif" letter-spacing="2">ICBC</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Privado Internacional</div>
+        <div class="bcard-name">Hipotecario ICBC</div>
+        <div class="bcard-specs">$360M / 75% &nbsp;|&nbsp; <strong style="color:#b85c38">10,5% TNA</strong> cta. sueldo &nbsp;|&nbsp; Plazo 20 años</div>
+        <div class="bcard-mono">Uso permanente exclusivo.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>TNA mercado gral.:</strong>&nbsp;12%</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Ingreso mín.:</strong>&nbsp;~$1.100.000/mes</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Monto máx.:</strong>&nbsp;$360M o 75% del valor</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Cuota ref.:</strong>&nbsp;~$998.380/mes ($100M · 20 años)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANCO CIUDAD -->
+    <div class="bcard" data-tipo="especial" data-mono="false">
+      <div class="bcard-img bg-ciudad">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Ciudad de Buenos Aires obelisk simplified -->
+          <rect x="16" y="16" width="14" height="48" fill="white" opacity=".3"/>
+          <rect x="20" y="12" width="6" height="8" fill="white" opacity=".5"/>
+          <text x="154" y="34" text-anchor="middle" font-size="14" fill="white" font-family="sans-serif" font-weight="300" letter-spacing=".5">BANCO</text>
+          <text x="154" y="56" text-anchor="middle" font-size="22" fill="white" font-family="sans-serif" font-weight="500">Ciudad</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Línea Especial CABA · Mar 2026</div>
+        <div class="bcard-name">Hipotecario Banco Ciudad</div>
+        <div class="bcard-specs">$100M / 75% &nbsp;|&nbsp; <strong style="color:#1e6a5e">7,5% TNA</strong> subsidiada &nbsp;|&nbsp; Solo CABA</div>
+        <div class="bcard-mono">1ra vivienda CABA · Exento Sellos e Ing. Brutos.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Zona sur/microcentro:</strong>&nbsp;8,5% TNA</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Resto CABA:</strong>&nbsp;9,5% TNA</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Propiedad:</strong>&nbsp;máx. 80 m² · USD 2.800/m²</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Con garante:</strong>&nbsp;65% financiación</div>
+          <div class="req-row"><span class="req-dot"></span>Subsidio GCBA · fondeo via ON $100.000M</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PATAGONIA -->
+    <div class="bcard" data-tipo="privado" data-mono="false">
+      <div class="bcard-img bg-pata">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Patagonia mountain silhouette -->
+          <polygon points="14,66 38,24 62,66" fill="white" opacity=".25"/>
+          <polygon points="30,66 50,36 70,66" fill="white" opacity=".15"/>
+          <text x="168" y="34" text-anchor="middle" font-size="11" fill="white" font-family="sans-serif" font-weight="300" letter-spacing=".5">BANCO</text>
+          <text x="168" y="56" text-anchor="middle" font-size="20" fill="white" font-family="sans-serif" font-weight="500">Patagonia</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Privado</div>
+        <div class="bcard-name">Hipotecario Bco Patagonia</div>
+        <div class="bcard-specs">$320M / 75% &nbsp;|&nbsp; <strong style="color:#b85c38">12,5% TNA</strong> &nbsp;|&nbsp; Plazo 30 años</div>
+        <div class="bcard-mono">Consultar condiciones.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>TNA cta. sueldo:</strong>&nbsp;5,4% (referencia anterior)</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Monto máx.:</strong>&nbsp;$320M · primera y segunda vivienda</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Relación cuota/ing.:</strong>&nbsp;máx. 25%</div>
+          <div class="req-row"><span class="req-dot"></span>Grupo Bradesco · cancelación anticipada permitida</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CREDICOOP -->
+    <div class="bcard" data-tipo="publico" data-mono="false">
+      <div class="bcard-img bg-coop">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Cooperative circle symbol -->
+          <circle cx="36" cy="40" r="22" fill="none" stroke="white" stroke-width="2.5" opacity=".8"/>
+          <path d="M24 40 Q36 22 48 40 Q36 58 24 40 Z" fill="white" opacity=".4"/>
+          <text x="158" y="46" text-anchor="middle" font-size="20" font-weight="600" fill="white" font-family="sans-serif">Credicoop</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Cooperativo</div>
+        <div class="bcard-name">Hipotecario Credicoop</div>
+        <div class="bcard-specs">12,5% TNA &nbsp;|&nbsp; Cuota ref: ~$1.250.000/mes</div>
+        <div class="bcard-mono">Consultar condiciones.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Relación cuota/ing.:</strong>&nbsp;máx. 25%</div>
+          <div class="req-row"><span class="req-dot"></span>Banco cooperativo de capital nacional</div>
+          <div class="req-row"><span class="req-dot"></span>Misma tasa que Ciudad y Patagonia</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMAFI -->
+    <div class="bcard" data-tipo="privado" data-mono="false">
+      <div class="bcard-img bg-comafi">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Comafi C mark -->
+          <path d="M44 22 Q18 22 18 40 Q18 58 44 58" stroke="#2a2a2a" stroke-width="5" fill="none" stroke-linecap="round"/>
+          <text x="158" y="48" text-anchor="middle" font-size="26" font-weight="500" fill="#2a2a2a" font-family="sans-serif">Comafi</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Privado Nacional</div>
+        <div class="bcard-name">Hipotecario Banco Comafi</div>
+        <div class="bcard-specs">~10% TNA &nbsp;|&nbsp; Cuota ref: ~$1.100.000/mes</div>
+        <div class="bcard-mono">Consultar condiciones.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Cuota ref.:</strong>&nbsp;~$1.100.000/mes (USD 100k · 20 años)</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Posición:</strong>&nbsp;4to lugar cuota más baja del mercado</div>
+          <div class="req-row"><span class="req-dot"></span>Banco privado de capital nacional</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRUBANK -->
+    <div class="bcard" data-tipo="privado" data-mono="false">
+      <div class="bcard-img bg-bru">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- B mark stylized -->
+          <rect x="14" y="16" width="7" height="48" fill="white" opacity=".9"/>
+          <path d="M21 16 L42 16 Q54 16 54 28 Q54 40 21 40" stroke="white" stroke-width="3" fill="none" opacity=".9"/>
+          <path d="M21 40 L46 40 Q60 40 60 52 Q60 64 21 64" stroke="white" stroke-width="3" fill="none" opacity=".9"/>
+          <text x="158" y="48" text-anchor="middle" font-size="24" font-weight="600" fill="white" font-family="sans-serif">Brubank</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Fintech Digital</div>
+        <div class="bcard-name">Hipotecario Brubank</div>
+        <div class="bcard-specs">$250M / 70% &nbsp;|&nbsp; <strong style="color:#b85c38">~11% TNA</strong> cta. sueldo &nbsp;|&nbsp; Plazo 30 años</div>
+        <div class="bcard-mono">Consultar condiciones.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>TNA mercado gral.:</strong>&nbsp;14%</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Ingreso mín.:</strong>&nbsp;~$1.200.000/mes</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Cuota ref.:</strong>&nbsp;~$1.212.000/mes ($100M · 20 años)</div>
+          <div class="req-row"><span class="req-dot"></span>100% digital · primera y segunda vivienda</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BANCO DEL SOL -->
+    <div class="bcard" data-tipo="privado" data-mono="false">
+      <div class="bcard-img bg-sol">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Sun rays -->
+          <circle cx="36" cy="40" r="14" fill="#f5a623"/>
+          <line x1="36" y1="10" x2="36" y2="18" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+          <line x1="36" y1="62" x2="36" y2="70" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+          <line x1="10" y1="40" x2="18" y2="40" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+          <line x1="54" y1="40" x2="62" y2="40" stroke="#f5a623" stroke-width="3" stroke-linecap="round"/>
+          <line x1="18" y1="18" x2="24" y2="24" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="48" y1="56" x2="54" y2="62" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="54" y1="18" x2="48" y2="24" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="18" y1="56" x2="24" y2="62" stroke="#f5a623" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="165" y="36" text-anchor="middle" font-size="14" font-weight="500" fill="#2a2a2a" font-family="sans-serif">Banco</text>
+          <text x="165" y="56" text-anchor="middle" font-size="18" font-weight="500" fill="#2a2a2a" font-family="sans-serif">del Sol</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Digital</div>
+        <div class="bcard-name">Hipotecario Banco del Sol</div>
+        <div class="bcard-specs">~9% TNA &nbsp;|&nbsp; Cuota ref: ~$992.500/mes</div>
+        <div class="bcard-mono">Consultar condiciones.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Ingreso mín.:</strong>&nbsp;~$1.000.000/mes</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Posición:</strong>&nbsp;3er lugar cuota más baja del mercado</div>
+          <div class="req-row"><span class="req-dot"></span>Banco digital · proceso 100% online</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAPRO -->
+    <div class="bcard" data-tipo="especial" data-mono="false">
+      <div class="bcard-img bg-bapro">
+        <svg width="240" height="80" viewBox="0 0 260 80" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bapro shield -->
+          <path d="M18 16 L46 16 L46 50 Q46 64 32 70 Q18 64 18 50 Z" fill="white" opacity=".2"/>
+          <path d="M18 16 L46 16 L46 50 Q46 64 32 70 Q18 64 18 50 Z" fill="none" stroke="white" stroke-width="2" opacity=".7"/>
+          <text x="32" y="45" text-anchor="middle" font-size="10" fill="white" font-family="sans-serif" font-weight="600">BP</text>
+          <text x="168" y="34" text-anchor="middle" font-size="13" fill="white" font-family="sans-serif" font-weight="300" letter-spacing=".5">BANCO</text>
+          <text x="168" y="56" text-anchor="middle" font-size="20" fill="white" font-family="sans-serif" font-weight="600">Provincia</text>
+        </svg>
+      </div>
+      <div class="bcard-body">
+        <div class="bcard-cat">Hogar · Banco Público PBA · En Pesos</div>
+        <div class="bcard-name">Hipotecario Bapro</div>
+        <div class="bcard-specs">33,4% TNA variable · <strong style="color:#b85c38">SIN ajuste UVA</strong> · hasta USD 250.000</div>
+        <div class="bcard-mono">Banco Provincia Buenos Aires.</div>
+        <div class="bcard-reqs">
+          <div class="req-row"><span class="req-dot"></span><strong>Plazo:</strong>&nbsp;hasta 240 meses (20 años)</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Diferencia clave:</strong>&nbsp;pesos a tasa variable, sin UVA</div>
+          <div class="req-row"><span class="req-dot"></span><strong>Cuota ref.:</strong>&nbsp;~$2.849.476 ($100M · 20 años)</div>
+          <div class="req-row"><span class="req-dot"></span>Modalidad muy diferente al resto del mercado</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /banks-grid -->
+
+  <!-- TABLE -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>#</th><th>Banco</th><th>TNA</th><th>Financiacion</th><th>Plazo</th><th>Monotrib.</th><th>Cuota est.*</th><th>Tipo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-n">01</td><td class="td-b">Banco Nacion</td><td class="td-rate t-best">6%</td><td>75%</td><td>30 años</td><td class="t-yes">✓</td><td>~$820.000</td><td>Publico</td></tr>
+        <tr><td class="td-n">02</td><td class="td-b">Banco Ciudad (CABA)</td><td class="td-rate t-best">7,5%</td><td>75% · $100M</td><td>—</td><td>—</td><td>~$806.000</td><td>Publico sub.</td></tr>
+        <tr><td class="td-n">03</td><td class="td-b">BBVA (monotributistas)</td><td class="td-rate t-best">7,5%</td><td>80%</td><td>30 años</td><td class="t-yes">✓</td><td>~$565.000</td><td>Privado</td></tr>
+        <tr><td class="td-n">04</td><td class="td-b">Bancor</td><td class="td-rate t-mid">8,9–9,9%</td><td>75% · 250k UVA</td><td>20 años</td><td class="t-yes">✓</td><td>—</td><td>Publico Cba.</td></tr>
+        <tr><td class="td-n">05</td><td class="td-b">Banco del Sol</td><td class="td-rate t-mid">~9%</td><td>—</td><td>—</td><td>—</td><td>~$992.500</td><td>Digital</td></tr>
+        <tr><td class="td-n">06</td><td class="td-b">Santander</td><td class="td-rate t-mid">~5,5%</td><td>80%</td><td>30 años</td><td class="t-yes">✓</td><td>—</td><td>Privado</td></tr>
+        <tr><td class="td-n">07</td><td class="td-b">Banco Macro</td><td class="td-rate t-mid">7%</td><td>Sin limite</td><td>30 años</td><td class="t-yes">✓</td><td>—</td><td>Privado</td></tr>
+        <tr><td class="td-n">08</td><td class="td-b">Banco Galicia</td><td class="td-rate t-mid">7,5%</td><td>80% · sin limite</td><td>30 años</td><td class="t-yes">✓</td><td>—</td><td>Privado</td></tr>
+        <tr><td class="td-n">09</td><td class="td-b">ICBC</td><td class="td-rate t-mid">10,5%</td><td>75% · $360M</td><td>20 años</td><td>—</td><td>~$998.380</td><td>Privado</td></tr>
+        <tr><td class="td-n">10</td><td class="td-b">Brubank</td><td class="td-rate t-mid">~11%</td><td>—</td><td>—</td><td>—</td><td>~$1.212.000</td><td>Fintech</td></tr>
+        <tr><td class="td-n">11</td><td class="td-b">Comafi</td><td class="td-rate t-mid">~10%</td><td>—</td><td>—</td><td>—</td><td>~$1.100.000</td><td>Privado</td></tr>
+        <tr><td class="td-n">12</td><td class="td-b">Banco Hipotecario</td><td class="td-rate t-hi">12,5%</td><td>80% · $250M</td><td>15 años</td><td class="t-yes">✓</td><td>—</td><td>Privado</td></tr>
+        <tr><td class="td-n">13</td><td class="td-b">Banco Patagonia</td><td class="td-rate t-hi">12,5%</td><td>75%</td><td>—</td><td>—</td><td>—</td><td>Privado</td></tr>
+        <tr><td class="td-n">14</td><td class="td-b">Credicoop</td><td class="td-rate t-hi">12,5%</td><td>—</td><td>—</td><td>—</td><td>~$1.250.000</td><td>Cooperativo</td></tr>
+        <tr><td class="td-n">15</td><td class="td-b">Supervielle</td><td class="td-rate t-hi">15%</td><td>70%</td><td>30 años</td><td class="t-yes">✓</td><td>~$1.440.000</td><td>Privado</td></tr>
+        <tr><td class="td-n">16</td><td class="td-b">BBVA (sin haberes)</td><td class="td-rate t-hi">17%</td><td>80%</td><td>30 años</td><td>—</td><td>—</td><td>Privado</td></tr>
+        <tr><td class="td-n">17</td><td class="td-b">Bapro</td><td class="td-rate t-hi">33,4% var.</td><td>—</td><td>20 años</td><td>—</td><td>—</td><td>Publico PBA</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="disc"><strong>⚠ Datos orientativos · Marzo–Abril 2026.</strong> Todos los creditos ajustan por UVA + inflacion (CER) salvo Bapro y linea USD Macro. *Cuota estimada: USD 100.000 · 75% financiacion · 20 años.</div>
+</section>
+
+<!-- ══ 6. FAQ ══ -->
+<section id="faq">
+
+  <!-- SLIDE A: Preguntas Frecuentes — title+photo left, 2-col right -->
+  <div class="faq-a">
+    <div class="faq-a-left">
+      <h2>Preguntas<br>Frecuentes</h2>
+      <div class="faq-a-photo"></div>
+    </div>
+    <div class="faq-a-right">
+      <div>
+        <div class="fq">¿Que son los creditos hipotecarios UVA?</div>
+        <div class="fa">Los creditos UVA, por su sigla "Unidad de Valor Adquisitivo", son hipotecas que usan esa unidad de medida establecida por el Banco Central de la Republica Argentina (BCRA). El precio de cada UVA se ajusta segun la inflacion del mes previo.</div>
+      </div>
+      <div>
+        <div class="fq">¿A que publico estan apuntados?</div>
+        <div class="fa">A empleados con relacion de dependencia que perciban salarios por encima de $1,8 M. El promedio de ingresos por hogar recomendado es &gt;$3 M. Los monotributistas deberan tener antiguedad minima de 1 año ante AFIP, cumplir 3 meses en la categoria y presentar ultimos 3 pagos en tiempo y forma.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE B: 2-col Q&A left + photo right -->
+  <div class="faq-b">
+    <div class="faq-b-left">
+      <div>
+        <div class="fq">¿Cual es la proporcion cuota-ingreso?</div>
+        <div class="fa">En ningun caso la relacion cuota ingreso debera superar el 25% del ingreso presentado por la familia o el hipotecado UVA independiente. Para esa regla no hay excepcion en ninguna entidad.</div>
+      </div>
+      <div>
+        <div class="fq">¿A que montos se puede acceder?</div>
+        <div class="fa">El maximo es de $250 millones, salvo Supervielle, Galicia y Macro que no tienen tope. El credito del Banco Nacion tiene tope de 210.000 UVAs para vivienda unica a 6% TNA.</div>
+      </div>
+      <div>
+        <div class="fq">¿Que porcentaje de dinero se otorga para la compra de la propiedad?</div>
+        <div class="fa">Los bancos suelen prestar entre el 75% y el 80% del precio de compra. Se requiere contar con el 20–30% como anticipo propio en efectivo.</div>
+      </div>
+      <div>
+        <div class="fq">¿Cuales son los plazos?</div>
+        <div class="fa">4 de 10 bancos prestan a 30 años, 3 de 10 a 20 años, el resto a 15 años y puede haber excepciones. La edad maxima de cancelacion es generalmente 75–85 años segun el banco.</div>
+      </div>
+      <div>
+        <div class="fq">¿De cuanto es la tasa de interes?</div>
+        <div class="fa">Sin computar el UVA (la inflacion anual), oscilan entre 6% y 17% TNA en 2026. El interes es similar al de paises como Colombia y Uruguay que cobran entre 4,5% y 7%, economias con menor riesgo e inflacion.</div>
+      </div>
+      <div>
+        <div class="fq">¿Los bancos prestan pesos o dolares?</div>
+        <div class="fa">Todos los creditos se otorgan en pesos argentinos. La unica excepcion es Banco Macro con su linea en dolares (11,5% anual). La forma de dolarizar el prestamo es ir al dolar MEP mediante una ALYC en el Mercado de Capitales.</div>
+      </div>
+    </div>
+    <div class="faq-b-photo"></div>
+  </div>
+
+</section>
+
+<!-- ══ 7. CONDICIONES ══ -->
+<section id="condiciones">
+  <p class="section-eyebrow">Requisitos · Mercado 2026</p>
+  <h2 class="section-h" style="margin-bottom:44px">Condiciones generales<br>del mercado</h2>
+
+  <div class="bento">
+    <!-- Cuota/Ingreso oscuro -->
+    <div class="bn bn-6 bn-blk">
+      <span class="bn-lbl">Regla universal</span>
+      <div style="display:flex;align-items:baseline;gap:8px">
+        <span class="bn-sup" style="color:var(--gold)">25–30</span>
+        <span class="bn-ttl" style="color:var(--white);font-size:1.4rem">%</span>
+      </div>
+      <div class="bn-ttl">Cuota / Ingreso neto familiar</div>
+      <div class="bn-txt">La cuota mensual no puede exceder este porcentaje del ingreso neto. Se suman ingresos del conyuge, conviviente, y en algunos bancos padres o hermanos.</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.65rem;color:rgba(255,255,255,.32);letter-spacing:.1em;text-transform:uppercase">Minimo</span><span style="font-size:.7rem;color:var(--gold);font-weight:500">25%</span></div>
+          <div class="bar"><div class="bar-f" style="width:25%"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.65rem;color:rgba(255,255,255,.32);letter-spacing:.1em;text-transform:uppercase">Maximo</span><span style="font-size:.7rem;color:var(--gold);font-weight:500">30–35%</span></div>
+          <div class="bar"><div class="bar-f" style="width:33%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scoring -->
+    <div class="bn bn-6">
+      <span class="bn-lbl">Scoring crediticio · BCRA</span>
+      <div class="bn-ttl">Historial impecable requerido</div>
+      <div class="bn-txt">Se exige Situacion 1 BCRA (sin atrasos). Banco Nacion elevo su exigencia a ~900 puntos. Se analiza historial de los ultimos 24 meses.</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:4px">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.74rem;color:var(--gray)">Banco Nacion (muy exigente)</span><span style="font-size:.7rem;font-weight:500;color:var(--rust)">~900 pts</span></div>
+          <div class="bar"><div class="bar-f" style="width:90%;background:var(--rust)"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.74rem;color:var(--gray)">Bancos privados (flexible)</span><span style="font-size:.7rem;font-weight:500;color:var(--green)">600–700 pts</span></div>
+          <div class="bar"><div class="bar-f" style="width:65%;background:var(--green)"></div></div>
+        </div>
+      </div>
+      <div class="chips"><span class="chip">Sin deudas en mora</span><span class="chip">Sin cheques rechazados</span><span class="chip">12 meses limpios</span></div>
+    </div>
+
+    <!-- Anticipo dorado -->
+    <div class="bn bn-3 bn-gld">
+      <span class="bn-lbl">Anticipo minimo</span>
+      <span class="bn-sup">20–30</span>
+      <span class="bn-ttl" style="font-size:1rem">% en efectivo</span>
+      <div class="bn-txt" style="margin-top:auto">del valor total del inmueble, antes de solicitar el credito.</div>
+    </div>
+
+    <!-- UVA sage -->
+    <div class="bn bn-4 bn-sage">
+      <span class="bn-lbl">Indexacion</span>
+      <span class="bn-ttl">Ajuste por UVA + CER</span>
+      <div class="bn-txt">Capital, cuotas y saldo se actualizan por inflacion (IPC con rezago ~45 dias). La TNA es adicional a este ajuste.</div>
+      <div style="margin-top:4px">
+        <div class="brow"><span class="bk">Bapro (excepcion)</span><span class="bv" style="color:#8fcc7a">Pesos · sin UVA</span></div>
+        <div class="brow"><span class="bk">Macro (linea USD)</span><span class="bv" style="color:#8fcc7a">Dolares · sin UVA</span></div>
+      </div>
+    </div>
+
+    <!-- Antigüedad -->
+    <div class="bn bn-3">
+      <span class="bn-lbl">Antiguedad laboral</span>
+      <div style="display:flex;flex-direction:column;gap:14px;margin-top:4px">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.76rem;color:var(--gray)">Relacion de dependencia</span><span style="font-weight:600;font-size:.86rem">1 año</span></div>
+          <div class="bar"><div class="bar-f" style="width:33%"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.76rem;color:var(--gray)">Monotributistas / autonomos</span><span style="font-weight:600;font-size:.86rem">2 años</span></div>
+          <div class="bar"><div class="bar-f" style="width:66%"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:.76rem;color:var(--gray)">Contratados</span><span style="font-weight:600;font-size:.86rem">4 años</span></div>
+          <div class="bar"><div class="bar-f" style="width:100%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edad -->
+    <div class="bn bn-3">
+      <span class="bn-lbl">Edad del solicitante</span>
+      <div style="display:flex;align-items:baseline;gap:6px;margin-top:4px">
+        <span class="bn-sup" style="font-size:3rem">18</span>
+        <span style="font-size:.76rem;color:var(--gray)">años min.</span>
+      </div>
+      <div style="height:1px;background:var(--border);margin:6px 0"></div>
+      <div class="bn-txt"><strong style="color:var(--black)">Edad + plazo ≤ 75–85 años</strong> segun el banco.</div>
+      <div style="background:var(--off-white);padding:12px;margin-top:4px">
+        <div style="font-size:.66rem;color:var(--light-gray);margin-bottom:4px">Ejemplo: 55 años →</div>
+        <div style="font-size:.84rem;font-weight:600">Plazo max. 20 años</div>
+      </div>
+    </div>
+
+    <!-- Destinos -->
+    <div class="bn bn-4">
+      <span class="bn-lbl">Destinos permitidos</span>
+      <div class="bn-ttl" style="margin-bottom:4px">Para que puedo usar el credito</div>
+      <div class="dest-l">
+        <div class="dest-i"><div class="dot"></div>Adquisicion de vivienda</div>
+        <div class="dest-i"><div class="dot"></div>Cambio de vivienda</div>
+        <div class="dest-i"><div class="dot"></div>Construccion</div>
+        <div class="dest-i"><div class="dot"></div>Ampliacion o terminacion</div>
+        <div class="dest-i"><div class="dot" style="background:var(--light-gray)"></div>Refaccion (plazos menores)</div>
+        <div class="dest-i"><div class="dot" style="background:var(--rust)"></div>2da vivienda (tasa mas alta)</div>
+      </div>
+    </div>
+
+    <!-- Ingresos oscuro -->
+    <div class="bn bn-6 bn-blk">
+      <span class="bn-lbl">Ingresos minimos estimados · 2026</span>
+      <div class="bn-ttl">Cuanto necesitas ganar</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 16px;margin-top:4px">
+        <div>
+          <div class="brow"><span class="bk">Banco del Sol</span><span class="bv">$1.000.000</span></div>
+          <div class="brow"><span class="bk">ICBC</span><span class="bv">$1.100.000</span></div>
+          <div class="brow"><span class="bk">Banco Nacion</span><span class="bv" style="color:var(--gold)">$1.500.000+</span></div>
+        </div>
+        <div>
+          <div class="brow"><span class="bk">Estandar mercado</span><span class="bv" style="color:var(--gold)">$1,5M–$2M</span></div>
+          <div class="brow"><span class="bk">Salario prom. INDEC</span><span class="bv" style="color:var(--rust)">~$1.000.000</span></div>
+        </div>
+      </div>
+      <div class="bn-txt" style="margin-top:6px;font-size:.74rem">El salario promedio argentino queda por debajo del ingreso minimo requerido en la mayoria de los bancos para montos estandar.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ 8. CONTACTO ══ -->
+<section id="contact">
+  <p class="section-eyebrow">Contacto directo</p>
+  <div class="contact-grid">
+    <div>
+      <h2 class="contact-h">Agilizamos la<br>aprobacion crediticia.</h2>
+      <p class="contact-sub">Contactanos para que un asesor analice tu perfil y te conecte con el mejor credito disponible segun tus ingresos y objetivos.</p>
+    </div>
+    <div class="contact-rows">
+      <div class="c-row"><div class="c-lbl">Ubicacion</div><div class="c-val">Luis de Tejeda 3930, Cordoba — Argentina</div></div>
+      <div class="c-row"><div class="c-lbl">Email</div><div class="c-val"><a href="/cdn-cgi/l/email-protection#aac2c5c6cbeacbd8c6cfc4cec9c584c9c5c784cbd8"><span class="__cf_email__" data-cfemail="84ecebe8e5c4e5f6e8e1eae0e7ebaae7ebe9aae5f6">[email&#160;protected]</span></a></div></div>
+      <div class="c-row"><div class="c-lbl">Telefono</div><div class="c-val">(123) 456-7890</div></div>
+      <div class="c-row"><div class="c-lbl">Social</div><div class="c-val"><a href="#">@arlendco</a></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 9. FOOTER — exact Canva layout ══ -->
+<footer>
+  <div class="ft-top">
+
+    <!-- col 1: huge brand name -->
+    <div class="ft-brand">Arlend.Co</div>
+
+    <!-- col 2: nav links -->
+    <div class="ft-nav">
+      <a href="#about">Personas</a>
+      <a href="#why">Acompanamiento Financiero</a>
+      <a href="#creditos">Seguros</a>
+      <a href="#creditos">Propiedades</a>
+    </div>
+
+    <!-- col 3: contact info -->
+    <div class="ft-contact">
+      <div class="ft-contact-block">
+        <p><strong>Main Office</strong><br>1 Luis de Tejeda 3930.<br>Cordoba - Argentina</p>
+      </div>
+      <div class="ft-contact-block">
+        <p>Tel: (123) 456-7890<br>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d7bfb8bbb697b6a5bbb2b9b3b4b8f9b4b8baf9b6a5">[email&#160;protected]</a><br>Social: @arlendco</p>
+      </div>
+      <div class="ft-socials">
+        <!-- Facebook -->
+        <a href="#" class="ft-soc" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <!-- Twitter -->
+        <a href="#" class="ft-soc" aria-label="Twitter">
+          <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+        </a>
+        <!-- Instagram -->
+        <a href="#" class="ft-soc" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="ft-bottom">
+    <p>© 2026 Arlend.Co — Marketplace creditos hipotecarios · Cordoba, Argentina</p>
+    <p>Datos orientativos. Consulta con tu banco o asesor antes de operar.</p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function fc(tipo,btn){
